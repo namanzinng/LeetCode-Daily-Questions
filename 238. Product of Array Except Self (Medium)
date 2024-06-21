@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<int> ans(n,1);
+
+        // Fill ans with left products
+        
+        for (int i = 1; i < n; i++) {
+            ans[i] = nums[i - 1] * ans[i - 1];
+        }
+
+        // Initialize rightP to 1
+
+        int rightP = 1;
+
+        // Update ans with right products
+
+        for (int i = n - 1; i >= 0; i--) {
+            ans[i] = ans[i] * rightP;
+            rightP *= nums[i];
+        }
+
+        return ans;
+    }
+};
